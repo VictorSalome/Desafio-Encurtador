@@ -1,3 +1,10 @@
+:root {
+  --vermelho-100: #AA1423;
+  --textoApoio-100: #777;
+  --lineBackground: #EEE;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +13,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }

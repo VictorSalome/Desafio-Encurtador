@@ -1,11 +1,13 @@
+import { Header } from "./components/Header";
+import { MainCenter } from "./components/MainCenter";
+import { MainTop } from "./components/MainTop";
+
 function App() {
   return (
     <>
-      <div>
-        <h1 className="text-3xl first-line:font-bold underline">
-          Hello world!
-        </h1>
-      </div>
+      <Header />
+      <MainTop />
+      <MainCenter />
     </>
   );
 }
