@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 export const MainTop = () => {
   return (
     <main
-      className="bg-center bg-cover text-white h-48"
+      className="bg-center bg-cover text-white h-auto"
       style={{ backgroundImage: `url(${backgroundMain})` }}
     >
       <div className="flex flex-col w-full items-center p-9 h-56 ">
