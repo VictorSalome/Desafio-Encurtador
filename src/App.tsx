@@ -1,16 +1,12 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { MainBase } from "./components/MainBase";
-import { MainCenter } from "./components/MainCenter";
-import { MainTop } from "./components/MainTop";
+import { Main } from "./components/Main";
 
 function App() {
   return (
-    <div className="App flex flex-col min-h-screen">
+    <div className=" flex flex-col min-h-screen">
       <Header />
-      <MainTop />
-      <MainCenter />
-      <MainBase />
+      <Main />
       <Footer />
     </div>
   );

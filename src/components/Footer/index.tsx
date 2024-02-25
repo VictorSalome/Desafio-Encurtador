@@ -4,18 +4,24 @@ import FooterTwiter from "../../assets/icon-twitter.png";
 
 export const Footer = () => {
   return (
-    <footer className="bg-white mt-auto">
+    <footer className="bg-white">
       <Grid container justifyContent="center">
         <Grid item xs={12}>
-          <div className="flex flex-row justify-between items-center">
-            <h1 className="font-bold text-vermelho-100 ml-10">ch.dc</h1>
-            <div className="flex flex-row gap-2 px-10">
+          <div className="flex flex-row justify-between items-center md:px-36 md:gap-1 md:p-3 ">
+            <h1 className="font-bold text-vermelho-100 ml-10 md:text-2xl ">
+              ch.dc
+            </h1>
+            <div className="flex flex-row gap-2 px-10 md:gap-7">
               <img
                 src={FooterFacebook}
                 alt="Footer-Facebook"
-                className="w-5 h-5"
+                className="w-5 h-5 md:w-8 md:h-8"
               />
-              <img src={FooterTwiter} alt="Footer-Twiter" className="w-5 h-5" />
+              <img
+                src={FooterTwiter}
+                alt="Footer-Twiter"
+                className="w-5 h-5 md:w-8 md:h-8"
+              />
             </div>
           </div>
         </Grid>
