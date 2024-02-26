@@ -16,7 +16,7 @@ export const TopFive = () => {
         TOP 5
       </h1>
       <div className="flex flex-col items-center justify-center">
-        <List className="h-auto w-96">
+        <List className="h-auto w-full md:w-96">
           {topFiveData.map((item) => (
             <ListItem key={item.id} divider>
               <Box
