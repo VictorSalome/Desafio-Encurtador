@@ -1,12 +1,11 @@
 import { TextField } from "@mui/material";
-import { Dados } from "../index";
+import dados from "../../../dadosApi/dados";
 
-interface TopFiveProps {
-  apiInfo: Dados[];
-}
-
-export const Hits = ({ apiInfo }: TopFiveProps) => {
-  const totalHits = apiInfo.reduce((acc, curr) => acc + parseInt(curr.hits), 0);
+export const Hits = () => {
+  const totalHits = dados.dados.reduce(
+    (acc, curr) => acc + parseInt(curr.hits.toString()),
+    0
+  );
   const formattedTotalHits = totalHits.toLocaleString();
 
   return (
