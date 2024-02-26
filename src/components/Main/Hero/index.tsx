@@ -1,8 +1,43 @@
 import backgroundMain from "../../../assets/background-home.jpg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useState } from "react";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 export const Hero = () => {
+  const [longUrl, setLongUrl] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+
+  const handleShortenUrl = async () => {
+    try {
+      const response = await axios.post(
+        "https://api-ssl.bitly.com/v4/shorten",
+        {
+          long_url: longUrl,
+        },
+        {
+          headers: {
+            Authorization: "Bearer 6f29e4486332feb54a1af46dbd68c85a77515981",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setShortUrl(response.data.link);
+      toast.success("Link encurtado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao encurtar link:", error);
+      toast.error("Erro ao encurtar o link. Por favor, tente novamente.");
+    }
+  };
+
+  const handleReset = () => {
+    setShortUrl("");
+    setLongUrl("");
+  };
+
   return (
     <section
       className="bg-center bg-cover text-white h-64 md:h-1/3"
@@ -19,46 +54,110 @@ export const Hero = () => {
           </p>
         </div>
 
-        <div className="flex flex-row p-2 justify-center items-center md: gap-2">
-          <TextField
-            id="standard-basic"
-            label="Cole o seu link aqui"
-            variant="standard"
-            size="small"
-            fullWidth
-            color="warning"
-            sx={{
-              "& label.Mui-focused": {
-                color: "#FF6C00", // Define a cor quando o campo está focado
-              },
-              "& label": {
-                color: "#FF6C00", // Define a cor padrão do label
-              },
-              "& .css-w8lmpe-MuiInputBase-root-MuiInput-root::before": {
-                borderBottom: "1px solid #FF6C00",
-              },
-              "@media (min-width: 768px)": {
-                // Mude para o tamanho desejado no breakpoint md (768px)
-                width: "300px", // Por exemplo, altera a largura para 300px
-                fontSize: "1rem", // Define o tamanho da fonte para 1rem (ou outro tamanho desejado)
-              },
-            }}
-          />
-          <Button
-            variant="contained"
-            size="small"
-            color="warning"
-            sx={{
-              width: "100px",
-              height: "30px",
-              fontSize: "0.75rem",
-              padding: "0",
-              marginTop: "0.85rem",
-            }}
-          >
-            ENCURTAR
-          </Button>
-        </div>
+        {shortUrl ? (
+          <div className="mt-4">
+            <p className="text-sm text-center text-white">URL Encurtada:</p>
+            <div className="flex items-center justify-center">
+              <TextField
+                id="short-url-input"
+                variant="standard"
+                label="URL:"
+                size="small"
+                fullWidth
+                value={shortUrl}
+                InputProps={{
+                  readOnly: true,
+                }}
+                InputLabelProps={{
+                  sx: { color: "white" }, // Estilo da label
+                }}
+                sx={{
+                  width: "100%", // Expandindo para a largura total
+                  "& .MuiInputBase-input": {
+                    color: "white",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    border: "none",
+                    backgroundColor: "transparent",
+                  },
+                }}
+              />
+              <CopyToClipboard
+                text={shortUrl}
+                onCopy={() => toast.success("URL copiada!")}
+              >
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="warning"
+                  sx={{
+                    height: "30px",
+                    fontSize: "0.75rem",
+                    padding: "0",
+                    marginTop: "0.85rem",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                  Copiar
+                </Button>
+              </CopyToClipboard>
+              <Button
+                variant="contained"
+                size="small"
+                color="warning"
+                onClick={handleReset}
+                sx={{
+                  height: "30px",
+                  fontSize: "0.65rem",
+                  padding: "0",
+                  marginTop: "0.85rem",
+                  marginLeft: "0.5rem",
+                }}
+              >
+                Encurtar outra URL
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-row p-2 justify-center items-center md: gap-2">
+            <TextField
+              id="standard-basic"
+              label="Cole o seu link aqui"
+              variant="standard"
+              size="small"
+              fullWidth
+              color="warning"
+              value={longUrl}
+              onChange={(e) => setLongUrl(e.target.value)}
+              sx={{
+                "& label.Mui-focused": {
+                  color: "#FF6C00",
+                },
+                "& label": {
+                  color: "#FF6C00",
+                },
+                "& .MuiInputBase-input": {
+                  color: "white",
+                },
+              }}
+            />
+            <Button
+              variant="contained"
+              size="small"
+              color="warning"
+              onClick={handleShortenUrl}
+              sx={{
+                height: "30px",
+                fontSize: "0.75rem",
+                padding: "0",
+                marginTop: "0.85rem",
+              }}
+            >
+              ENCURTAR
+            </Button>
+          </div>
+        )}
+        <ToastContainer />
       </div>
     </section>
   );
