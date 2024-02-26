@@ -38,7 +38,7 @@ const dados = {
     },
     {
       id: "19122",
-      hits: 1320,
+      hits: 1321,
       url: "http://chaordic.com.br",
       shortUrl: "http://bit.ly/qy5k9",
     },

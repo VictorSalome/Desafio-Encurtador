@@ -2,10 +2,12 @@ import { TextField } from "@mui/material";
 import dados from "../../../dadosApi/dados";
 
 export const Hits = () => {
-  const totalHits = dados.dados.reduce(
-    (acc, curr) => acc + parseInt(curr.hits.toString()),
-    0
-  );
+  const apiData = dados.dados;
+
+  // Calcula o total de hits
+  const totalHits = apiData.reduce((acc, curr) => acc + curr.hits, 0);
+
+  // Formata o total de hits para exibição
   const formattedTotalHits = totalHits.toLocaleString();
 
   return (
@@ -17,7 +19,7 @@ export const Hits = () => {
         <div className="flex items-center justify-center">
           <TextField
             variant="outlined"
-            value={formattedTotalHits}
+            value={formattedTotalHits} // Define o valor do TextField como o total de hits formatado
             size="small"
             InputProps={{
               readOnly: true,
